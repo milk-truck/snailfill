@@ -1,8 +1,9 @@
-use std::io::{stdin,stdout};
+// main.rs
+
+use std::io::stdin;
 
 use rand;
 use rand::prelude::SliceRandom;
-use rand::seq::IteratorRandom;
 
 const HEIGHT : usize = 5;
 const WIDTH  : usize = 10;
@@ -50,6 +51,7 @@ struct Position {
     y: usize,
 }
 
+#[allow(dead_code)]
 impl Position {
     fn left(self: &Self) -> Self {
         Self {x: self.x - 1, y: self.y}
@@ -101,6 +103,7 @@ fn display_grid(grid: &[[Cell; HEIGHT]; WIDTH]) {
     print!("\n")
 }
 
+
 fn set_snail(grid: &mut [[Cell; HEIGHT]; WIDTH], snail_coords: &Position) {
     grid[snail_coords.x][snail_coords.y] = Cell::Snail;
 }
@@ -109,9 +112,6 @@ fn set_yarn(grid: &mut [[Cell; HEIGHT]; WIDTH], yarn_pos: &Position) {
     grid[yarn_pos.x][yarn_pos.y] = Cell::Yarn;
 }
 
-fn unset_yarn(grid: &mut [[Cell; HEIGHT]; WIDTH], old_yarn_pos: &Position) {
-    grid[old_yarn_pos.x][old_yarn_pos.y] = Cell::Slimed;
-}
 
 fn move_forward(grid: &mut [[Cell; HEIGHT]; WIDTH], snail_position: &mut Position, yarn_trail: &mut Vec<Position>, next_step: Position) {
     yarn_trail.push(snail_position.clone());
